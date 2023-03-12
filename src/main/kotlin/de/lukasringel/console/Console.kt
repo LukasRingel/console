@@ -90,16 +90,21 @@ object Console {
   }
 
   /**
-   * This method executes the provided command
+   * This method separates the command name from the command arguments
+   * and tries to find and execute a command with the given name.
    */
   private fun handleCommandInput(input: String) {
+    // split the input into command name and arguments
+    val args = input.split(" ")
+    val commandName = args[0]
+    val commandArgs = args.drop(1).toTypedArray()
     // check if we have a command handler for the input
-    if (commandHandler?.exists(input) == false) {
-      error("Command '$input' not found. Type 'help' for a list of all commands.")
+    if (commandHandler?.exists(commandName) == false) {
+      error("Command '$commandName' not found. Type 'help' for a list of all commands.")
       return
     }
 
     // execute the command
-    commandHandler?.executeCommand(input)
+    commandHandler?.executeCommand(commandName, commandArgs)
   }
 }
