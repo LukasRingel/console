@@ -1,5 +1,6 @@
 plugins {
   kotlin("jvm") version "1.8.0"
+  id("maven-publish")
 }
 
 group = "de.lukasringel"
@@ -15,4 +16,16 @@ dependencies {
 
 kotlin {
   jvmToolchain(17)
+}
+
+publishing {
+  publications {
+    create<MavenPublication>("maven") {
+      groupId = project.group.toString()
+      artifactId = "console"
+      version = project.version.toString()
+
+      from(components["java"])
+    }
+  }
 }
