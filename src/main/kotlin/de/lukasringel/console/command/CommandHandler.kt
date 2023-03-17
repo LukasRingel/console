@@ -26,17 +26,9 @@ class CommandHandler {
   }
 
   /**
-   * This method executes a command
-   *
-   * We split the command by spaces and use the first part as the command name
-   * and the rest as the command arguments
-   *
-   * We then execute the command if it exists
+   * This method executes a command if it exists
    */
-  fun executeCommand(command: String) {
-    val args = command.split(" ")
-    val commandName = args[0]
-    val commandArgs = args.drop(1).toTypedArray()
+  fun executeCommand(commandName: String, commandArgs: Array<String>) {
     commands[commandName]?.execute(commandArgs)
   }
 
